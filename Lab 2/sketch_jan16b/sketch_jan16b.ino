@@ -8,6 +8,7 @@
 // Pin 9 will be used for the long lead of the LED.
 // Pin 8 will be uzed for the buzzer
 
+int secondled = 10;
 int led = 9;
 int buzzer = 8;
 
@@ -18,7 +19,8 @@ char inVal;
 void setup() {                
   // initialize the digital pin as an output.
   pinMode(led, OUTPUT); 
-  pinMode (buzzer, OUTPUT); 
+  pinMode(buzzer, OUTPUT); 
+  pinMode(secondled, OUTPUT);
   Serial.begin(9600); 
   
 }
@@ -31,13 +33,13 @@ void loop() {
     inVal=Serial.read();
     switch(inVal)
     {
-      case '0':
+      case 'x':
         digitalWrite(led, LOW);  
     // Stops the generation of a square wave triggered by tone(). Has no effect if no tone is being generated.
     noTone (buzzer);    
-        Serial.print("*");   
+        Serial.println("The first LED turned off.");   
         break;
-      case '1':
+      case 't':
         digitalWrite(led, HIGH);
     /*Tone needs 2 arguments, but can take three
       1) Pin#
@@ -45,10 +47,21 @@ void loop() {
       3) Duration - how long teh tone plays
     */
     tone (buzzer, 500,500);
-        Serial.println("+");
+        Serial.println("The first LED turned on and buzzer turned on");
+        break;
+        case '2':
+          digitalWrite(led, HIGH);
+          digitalWrite(secondled, HIGH);
+        Serial.println("Both LEDs turned on");  
+        break;  
+        case '0':
+          digitalWrite(led, LOW);
+          digitalWrite(secondled, LOW); 
+        Serial.println("Both LEDs turned off");  
         break;
       default:
-        digitalWrite(led, LOW);        
+        digitalWrite(led, LOW);  
+               
         
     }
   }
