@@ -21,26 +21,13 @@ void loop() {
  distance = distance/50;
  if (distance < 10)
  {
+  for (int i = 0; i < 5; i++)
+  {
     digitalWrite(LED, HIGH);
     delay (500);
     digitalWrite(LED, LOW);
     delay (500);
-    digitalWrite(LED, HIGH);
-    delay (500);
-    digitalWrite(LED, LOW);
-    delay (500);
-    digitalWrite(LED, HIGH);
-    delay (500);
-    digitalWrite(LED, LOW);
-    delay (500);
-    digitalWrite(LED, HIGH);
-    delay (500);
-    digitalWrite(LED, LOW);
-    delay (500);
-    digitalWrite(LED, HIGH);
-    delay (500);
-    digitalWrite(LED, LOW);
-    delay (500);
+  }
  }
  Serial.print(distance);
  Serial.println("cm");
