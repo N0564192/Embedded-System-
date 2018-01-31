@@ -1,10 +1,10 @@
-int A = 3;
-int B = 4;
-int C = 6; 
-int D = 8;
-int E = 9;
-int F = 11;
-int G = 12;
+#define A 3
+#define B 4
+#define C 6 
+#define D 8
+#define E 9
+#define F 11
+#define G 12
 
 int counter=0;
 int i;
