@@ -1,5 +1,7 @@
+#define TRIGPIN 2
 #define A 3
 #define B 4
+#define ECHOPIN 5
 #define C 6 
 #define D 8
 #define E 9
@@ -13,6 +15,8 @@ int i;
 
 
 void setup() {
+  pinMode(ECHOPIN, INPUT);
+  pinMode(TRIGPIN, OUTPUT);
   pinMode(A, OUTPUT);
   pinMode(B, OUTPUT);
   pinMode(C, OUTPUT);
@@ -130,10 +134,26 @@ static void Nine()
      digitalWrite(F,LOW);
      digitalWrite(G,LOW); 
 }
-
+static int Sensor()
+{
+ digitalWrite(TRIGPIN, LOW);
+ delayMicroseconds(2);
+ digitalWrite(TRIGPIN,HIGH);
+ delayMicroseconds(10);
+ digitalWrite(TRIGPIN,LOW); 
+ float distance = pulseIn(ECHOPIN, HIGH); // return 0 if no high pulse in 1sec
+ distance = distance/50;
+ Serial.print(distance);
+ Serial.println("cm");
+ delay(200);
+ return distance;
+}
 
 void loop() {
-        
+  
+  int distance = Sensor();
+  while(distance < 10)
+  {     
   if(counter == 0) 
   Zero();
   if(counter == 1) 
@@ -159,7 +179,7 @@ void loop() {
   {
     i = 0;
   }
-  delay(2000);
+  delay(500);
   
   i = i + 1;
   // count from 0 to 9
@@ -171,7 +191,26 @@ void loop() {
   {
     counter++;
   }
-    
-
-
+  }
+  counter--;
+  if(counter == 0) 
+  Zero();
+  if(counter == 1) 
+  One();
+  if(counter == 2) 
+  Two();
+  if(counter == 3) 
+  Three();
+  if(counter == 4) 
+  Four();
+  if(counter == 5) 
+  Five();
+  if(counter == 6) 
+  Six();
+  if(counter == 7) 
+  Seven();
+  if(counter == 8) 
+  Eight();
+  if(counter == 9) 
+  Nine();
 }
